@@ -6,17 +6,26 @@ clrScrn.addEventListener('click',reset);
 
 function reset(){
     let s=prompt("Enter number of squares");
+    while(s>100)
+        s=prompt('Enter a number less than 100');
     createNewGrid(s);
 }
 
 function createNewGrid(s){
-    //remove existing grid
     let sqrs=document.querySelectorAll('.grid > div');
+    
+    if(s===null){
+        sqrs.forEach(sqr=> sqr.classList.remove('etched'))
+        return;
+    }
+
+    //remove existing grid
     sqrs.forEach(sqr=> sqr.remove()); 
 
     //create new grid
-    grid.style.gridTemplateColumns=`repeat(${s},${500/s}px)`;
-    grid.style.gridTemplateRows=`repeat(${s},${500/s}px)`;
+    grid.style.gridTemplateColumns=`repeat(${s},${600/s}px)`;
+    grid.style.gridTemplateRows=`repeat(${s},${600/s}px)`;
+    grid.style.gap=`${80/s}px`
 
     for (let i = 0; i < s**2; i++) {
         let sqr=document.createElement('div');
